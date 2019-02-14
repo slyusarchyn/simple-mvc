@@ -2,23 +2,32 @@
 
 namespace App\Models;
 
+use PDO;
+
 /**
  * Class Db
  * @package App
  */
 class Db
 {
-
+    /**
+     * @var PDO
+     */
     public $pdo;
 
+    /**
+     * Db constructor.
+     */
     public function __construct()
     {
-
         $settings = $this->getPDOSettings();
-        $this->pdo = new \PDO($settings['dsn'], $settings['user'], $settings['pass'], null);
+        $this->pdo = new PDO($settings['dsn'], $settings['user'], $settings['pass'], null);
 
     }
 
+    /**
+     * @return array
+     */
     protected function getPDOSettings()
     {
         $config = include ROOTPATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'db.php';
@@ -29,9 +38,13 @@ class Db
         return $result;
     }
 
-    public function execute($query, array $params = null)
+    /**
+     * @param $query
+     * @param array|null $params
+     * @return array
+     */
+    public function execute(string $query, array $params = null)
     {
-
         if (is_null($params)) {
             $stmt = $this->pdo->query($query);
 
@@ -41,6 +54,5 @@ class Db
         $stmt->execute($params);
 
         return $stmt->fetchAll();
-
     }
 }

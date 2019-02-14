@@ -11,10 +11,19 @@ use Dotenv\Dotenv;
  */
 class App
 {
+    /**
+     * @var Router
+     */
     public static $router;
 
+    /**
+     * @var Db
+     */
     public static $db;
 
+    /**
+     * @var Kernel
+     */
     public static $kernel;
 
     public static function init()
@@ -32,12 +41,19 @@ class App
         static::$db = new Db();
     }
 
-    public static function loadClass($className)
+    /**
+     * @param string $className
+     */
+    public static function loadClass(string $className)
     {
         $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
         require_once ROOTPATH . DIRECTORY_SEPARATOR . $className . '.php';
     }
 
+    /**
+     * @param Throwable $e
+     * @throws InvalidRouteException
+     */
     public function handleException(Throwable $e)
     {
         if ($e instanceof InvalidRouteException) {

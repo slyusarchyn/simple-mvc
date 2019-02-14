@@ -8,6 +8,9 @@ namespace App\Http\Controllers;
  */
 class HelloController extends Controller
 {
+    /**
+     * @return false|string
+     */
     public function index()
     {
         return $this->render('hello');

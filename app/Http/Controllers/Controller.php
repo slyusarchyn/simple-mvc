@@ -13,7 +13,11 @@ class Controller
 
     public $layoutFile = 'views/layout/app.php';
 
-    public function renderLayout($body)
+    /**
+     * @param string $body
+     * @return false|string
+     */
+    public function renderLayout(string $body)
     {
         ob_start();
         require ROOTPATH . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'layout' . DIRECTORY_SEPARATOR . "app.php";
@@ -21,6 +25,11 @@ class Controller
         return ob_get_clean();
     }
 
+    /**
+     * @param $viewName
+     * @param array $params
+     * @return false|string
+     */
     public function render($viewName, array $params = [])
     {
         $viewFile = ROOTPATH . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $viewName . '.php';

@@ -8,6 +8,9 @@ namespace App\Http;
  */
 class Router
 {
+    /**
+     * @return array
+     */
     public function resolve()
     {
         if (($pos = strpos($_SERVER['REQUEST_URI'], '?')) !== false) {
